@@ -7,7 +7,7 @@ namespace ControllersExample.Controllers
   {
     [Route("/")]
     [Route("home")]
-    public ContentResult Index()
+    public IActionResult Index()
     {
       //return Content("hello from index", "text/html");
       return Content("<h1>Hello from index</h1>", "text/html");
@@ -21,21 +21,21 @@ namespace ControllersExample.Controllers
     }
 
     [Route("download-1")]
-    public VirtualFileResult Download1()
+    public IActionResult Download1()
     {
       //return new VirtualFileResult("/doc.html", "text/html");
       return File("/doc.html", "text/html");
     }
 
     [Route("download-2")]
-    public PhysicalFileResult Download2()
+    public IActionResult Download2()
     {
       //return new PhysicalFileResult(@"C:\Users\Student\Desktop\.NET\ASP.NET_CORE_STUDY\src\StaticFilesexample\wwwroot\eula.1028.txt", "plain/text");
       return PhysicalFile(@"C:\Users\Student\Desktop\.NET\ASP.NET_CORE_STUDY\src\StaticFilesexample\wwwroot\eula.1028.txt", "plain/text");
     }
 
     [Route("person")]
-    public JsonResult Person()
+    public IActionResult Person()
     {
       Person person = new Person() {
         Id=Guid.NewGuid(), FirstName="James", LastName="May", Age=63 
