@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ControllersExample.Models;
 
 namespace ControllersExample.Controllers
 {
@@ -19,10 +20,29 @@ namespace ControllersExample.Controllers
       return "hello from about";
     }
 
-    [Route("contact/")]
-    public string Contact()
+    [Route("download-1")]
+    public VirtualFileResult Download1()
     {
-      return "hello from contact";
+      //return new VirtualFileResult("/doc.html", "text/html");
+      return File("/doc.html", "text/html");
+    }
+
+    [Route("download-2")]
+    public PhysicalFileResult Download2()
+    {
+      //return new PhysicalFileResult(@"C:\Users\Student\Desktop\.NET\ASP.NET_CORE_STUDY\src\StaticFilesexample\wwwroot\eula.1028.txt", "plain/text");
+      return PhysicalFile(@"C:\Users\Student\Desktop\.NET\ASP.NET_CORE_STUDY\src\StaticFilesexample\wwwroot\eula.1028.txt", "plain/text");
+    }
+
+    [Route("person")]
+    public JsonResult Person()
+    {
+      Person person = new Person() {
+        Id=Guid.NewGuid(), FirstName="James", LastName="May", Age=63 
+      };
+
+      //return new JsonResult(person);
+      return Json(person);
     }
   }
 }
