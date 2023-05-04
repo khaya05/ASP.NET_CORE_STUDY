@@ -2,12 +2,26 @@
 
 namespace ControllersExample.Controllers
 {
+  [Controller]
   public class HomeController
   {
     [Route("/")]
-    public string method1()
+    [Route("home")]
+    public string Index()
     {
-      return "hello from method1";
+      return "hello from index";
+    }
+
+    [Route("about")]
+    public string About()
+    {
+      return "hello from about";
+    }
+
+    [Route("contact/")]
+    public string Contact()
+    {
+      return "hello from contact";
     }
   }
 }
