@@ -7,18 +7,18 @@ namespace IActinResultExample.Controllers
     [Route("bookstore")]
     public IActionResult Index()
     {
-      if(!Request.Query.ContainsKey("bookid"))
+      if(!Request.Query.ContainsKey("bookId"))
       {
         return BadRequest("book id is not supplied");
       }
 
-      if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
+      if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookId"])))
       {
         return BadRequest("book id can't be emplty");
       }
 
       //book id should be 1 to 1000
-      int id = Convert.ToInt32(Request.Query["bookid"]);
+      int id = Convert.ToInt32(Request.Query["bookId"]);
 
       if(id <= 0)
       {
