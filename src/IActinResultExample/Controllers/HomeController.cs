@@ -6,8 +6,9 @@ namespace IActinResultExample.Controllers
   public class HomeController : Controller
   {
     [Route("bookstore/{bookid?}/{isloggedin?}")]
-    public IActionResult Index([FromRoute] int? bookid, bool? isLoggedIn, Book book)
+    public IActionResult Index(int? bookid, bool? isLoggedIn, Book book)
     {
+      //book id should be applied
       if(bookid.HasValue == false)
       {
         return BadRequest("book id is not supplied or empty");
@@ -15,7 +16,7 @@ namespace IActinResultExample.Controllers
 
       if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookId"])))
       {
-        return BadRequest("book id can't be emplty");
+        return BadRequest("book id can't be emplty");  
       }
 
       if(bookid <= 0)
