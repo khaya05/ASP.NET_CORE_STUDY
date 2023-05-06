@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ModelValidationExample.CustomValidators;
+using System.ComponentModel.DataAnnotations;
 
 namespace ModelValidationExample.Modals
 {
@@ -27,6 +28,9 @@ namespace ModelValidationExample.Modals
 
     [Range(0, 999, ErrorMessage = "{0} should be between ${0} and ${1}")]
     public double? Price { get; set;}
+
+    [YearValidator(2005, ErrorMessage = "Date of Birth should be Jan 01, {0} or younger")]
+    public DateTime? DateOfBirth { get; set; }
 
     public override string ToString()
     {
