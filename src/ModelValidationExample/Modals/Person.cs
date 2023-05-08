@@ -1,5 +1,6 @@
 ﻿using ModelValidationExample.CustomValidators;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace ModelValidationExample.Modals
 {
@@ -31,6 +32,11 @@ namespace ModelValidationExample.Modals
 
     [YearValidator(2005, ErrorMessage = "Date of Birth should be Jan 01, {0} or younger")]
     public DateTime? DateOfBirth { get; set; }
+
+    public DateTime? FromDate { get; set; }
+
+    [DateRangeValidator("FromDate", ErrorMessage = "'From Date' should be older than or equal to 'To date'")]
+    public DateTime? ToDate { get; set; }
 
     public override string ToString()
     {
