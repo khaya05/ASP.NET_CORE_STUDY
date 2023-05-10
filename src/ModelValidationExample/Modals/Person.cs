@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace ModelValidationExample.Modals
 {
-  public class Person
+  public class Person: IValidatableObject
   {
     [Required(ErrorMessage = "{0} cannot be empty or null.")]
     [Display(Name = "Person Name")]
@@ -38,9 +38,19 @@ namespace ModelValidationExample.Modals
     [DateRangeValidator("FromDate", ErrorMessage = "'From Date' should be older than or equal to 'To date'")]
     public DateTime? ToDate { get; set; }
 
+    public int? Age { get; set; }
+
     public override string ToString()
     {
       return $"Person object - Person name:{Name}, Email:{Email}, Phone: {Phone}, Password: {Password}, Confirm Password: {ConfirmPassword}, Price: {Price}";
+    }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if(DateOfBirth.HasValue == false && Age.HasValue == false)
+      {
+        yield return new ValidationResult("Either Date of bitrh or Age must be empty|", new[] { nameof(Age) });
+      }
     }
   }
 }
