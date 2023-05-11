@@ -6,6 +6,7 @@ namespace ModelValidationExample.Controllers
   public class HomeController : Controller
   {
     [Route("register")]
+    //[Bind(nameof(Person.Name), nameof(Person.Email), nameof(Person.Password), nameof(Person.Password), nameof(Person.ConfirmPassword))]
     public IActionResult Index(Person person)
     {
       if(!ModelState.IsValid)

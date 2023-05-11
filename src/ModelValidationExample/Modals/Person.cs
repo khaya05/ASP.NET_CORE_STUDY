@@ -1,6 +1,6 @@
-﻿using ModelValidationExample.CustomValidators;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ModelValidationExample.CustomValidators;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 
 namespace ModelValidationExample.Modals
 {
@@ -31,6 +31,7 @@ namespace ModelValidationExample.Modals
     public double? Price { get; set;}
 
     [YearValidator(2005, ErrorMessage = "Date of Birth should be Jan 01, {0} or younger")]
+    [BindNever]
     public DateTime? DateOfBirth { get; set; }
 
     public DateTime? FromDate { get; set; }
