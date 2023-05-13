@@ -1,77 +1,36 @@
 ﻿@using ViewsExample.Modals
-@{
-  string appTitle = "Asp.Net Core Demo App";
-  Person person = new Person() 
-  { 
-    Name = "John", 
-    //DateOfBirth = Convert.ToDateTime("1999/10/11"),
-    DateOfBirth = null,
-    PersonGender = Person.Gender.Male
-  };
-
-  List<Person> people = new List<Person>()
-  {
-    new Person(){Name = "Sandy-lu", DateOfBirth = DateTime.Parse("2002-04/05"), PersonGender = Person.Gender.Female},
-    new Person(){Name = "Zack", DateOfBirth = DateTime.Parse("2001-05/05"), PersonGender = Person.Gender.Male},
-    new Person(){Name = "john", DateOfBirth = DateTime.Parse("2003-06/05"), PersonGender = Person.Gender.Other}
-  };
-}
-
-@{
-  double? GetAge(DateTime? dateOfBirth)
-  {
-    if (dateOfBirth != null)
-    {
-      return Math.Round((DateTime.Now - dateOfBirth.Value).TotalDays / 365.25);
-    }
-
-    return null;
-  }
-
-  string alertMessage = $"<script>alert('{people.Count} people found)</script>";
-}
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>@appTitle</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    @Html.Raw(alertMessage)
-    <div>welcome</div>
+<head>
+  <title>@ViewBag.appTitle</title>
+  <meta charset="utf-8" />
+  <link href="~/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="page-content">
+    <h1>Welcome</h1>
 
-    @if (person.DateOfBirth.HasValue) 
-      {
-        <div>Hello @person.Name</div>
-
-    <p>@GetAge(person.DateOfBirth) years old</p>
-    }
-
-    @switch (person.PersonGender)
-  {
-    case Person.Gender.Male:
-      <p>Genger is Male</p>
-      ;
-      break;
-
-    case Person.Gender.Female:
-      <p>Gender is Sheila</p>
-      ;
-      break;
-
-    case Person.Gender.Other:
-      <p>gender is other</p>
-      ;
-      break;
-  }
-
-  <ul>
-    @foreach(var item in people)
+    @foreach (Person person in ViewBag.people)
     {
-      @: Hello text;
-      <li>@item.Name</li>
-    };
-  </ul>
+      <div class="box float-left w-50">
+        <h3>@person.Name</h3>
+        <table class="table w-100">
+          <tbody>
+            <tr>
+              <td>Gender</td>
+              <td>@person.PersonGender</td> 
+            </tr>
+            <tr>
+              <td>Date of Birth</td>
+              <td>@person.DateOfBirth.Value.ToString("MM/dd/yyyy")</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+
 </body>
 </html>
